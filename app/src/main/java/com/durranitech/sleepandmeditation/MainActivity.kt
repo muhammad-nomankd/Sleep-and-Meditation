@@ -37,9 +37,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.durranitech.sleepandmeditation.data.model.SoundItem
-import com.durranitech.sleepandmeditation.ui.theme.SleepAndMeditationTheme
-import com.durranitech.sleepandmeditation.ui.theme.customWhiteforBg
-import com.durranitech.sleepandmeditation.ui.theme.shadeofBlueandGreen
+import com.durranitech.presentation.ui.theme.SleepAndMeditationTheme
+import com.durranitech.presentation.ui.theme.customWhiteforBg
+import com.durranitech.presentation.ui.theme.shadeofBlueandGreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 
@@ -62,7 +62,15 @@ class MainActivity : ComponentActivity() {
                     SoundItem(R.drawable.forest, "Forest", 1),
                     SoundItem(R.drawable.birds, "Birds", 2),
                     SoundItem(R.drawable.thunder, "Thunder", 3),
-                    SoundItem(R.drawable.drop, "Sleep", 3),
+                    SoundItem(R.drawable.sun, "Sleep", 4),
+                    SoundItem(R.drawable.morning, "Sleep", 5),
+                    SoundItem(R.drawable.yoga, "Sleep", 6),
+                    SoundItem(R.drawable.butterfly, "Sleep", 7),
+                    SoundItem(R.drawable.images, "Sleep", 8),
+                    SoundItem(R.drawable.rain, "Sleep", 9),
+                    SoundItem(R.drawable.forest, "Sleep", 10),
+                    SoundItem(R.drawable.birds, "Sleep", 11),
+                    SoundItem(R.drawable.morning, "Sleep", 11),
                 )
                 Scaffold { padding ->
                     Column(
@@ -81,11 +89,11 @@ class MainActivity : ComponentActivity() {
                         Text(
                             "Sound Categories",
                             fontSize = 24.sp,
-                            fontWeight = FontWeight.Medium,
+                            fontWeight = FontWeight.SemiBold,
                             modifier = Modifier.align(
                                 Alignment.CenterHorizontally
                             ),
-                            color = Color.Gray
+                            color = Color.DarkGray
                         )
                         LazyColumnWithTwoItemsPerRow(items)
                     }
@@ -130,7 +138,7 @@ fun LazyColumnWithTwoItemsPerRow(sounditem: List<SoundItem>) {
                                 ){
                                     Text(
                                         text = item.title,
-                                        color = Color.Gray,
+                                        color = Color.LightGray,
                                         fontWeight = FontWeight.Normal,
                                         modifier = Modifier
                                             .padding(8.dp, bottom = 12.dp)

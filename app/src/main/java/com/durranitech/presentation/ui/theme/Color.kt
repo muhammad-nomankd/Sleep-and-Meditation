@@ -1,4 +1,4 @@
-package com.durranitech.sleepandmeditation.ui.theme
+package com.durranitech.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
