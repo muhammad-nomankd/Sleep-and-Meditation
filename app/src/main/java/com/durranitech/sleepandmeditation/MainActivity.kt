@@ -4,43 +4,15 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.durranitech.sleepandmeditation.data.model.SoundItem
+import androidx.navigation.compose.rememberNavController
+import com.durranitech.presentation.ui.BottomNavigationItem
+import com.durranitech.presentation.ui.DecisionScreen
 import com.durranitech.presentation.ui.theme.SleepAndMeditationTheme
-import com.durranitech.presentation.ui.theme.customWhiteforBg
-import com.durranitech.presentation.ui.theme.shadeofBlueandGreen
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 
 class MainActivity : ComponentActivity() {
@@ -50,119 +22,19 @@ class MainActivity : ComponentActivity() {
         setContent {
             SleepAndMeditationTheme {
 
-                rememberSystemUiController().setStatusBarColor(
-                    shadeofBlueandGreen
-                )
-                rememberSystemUiController().setNavigationBarColor(
-                    customWhiteforBg
-                )
+                val navController = rememberNavController()
 
-                val items = listOf<SoundItem>(
-                    SoundItem(R.drawable.rain, "Relaxing", 0),
-                    SoundItem(R.drawable.forest, "Forest", 1),
-                    SoundItem(R.drawable.birds, "Birds", 2),
-                    SoundItem(R.drawable.thunder, "Thunder", 3),
-                    SoundItem(R.drawable.sun, "Sleep", 4),
-                    SoundItem(R.drawable.morning, "Sleep", 5),
-                    SoundItem(R.drawable.yoga, "Sleep", 6),
-                    SoundItem(R.drawable.butterfly, "Sleep", 7),
-                    SoundItem(R.drawable.images, "Sleep", 8),
-                    SoundItem(R.drawable.rain, "Sleep", 9),
-                    SoundItem(R.drawable.forest, "Sleep", 10),
-                    SoundItem(R.drawable.birds, "Sleep", 11),
-                    SoundItem(R.drawable.morning, "Sleep", 11),
-                )
-                Scaffold { padding ->
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(padding)
-                            .background(
-                                brush = Brush.linearGradient(
-                                    colors = listOf(
-                                        shadeofBlueandGreen, customWhiteforBg
-                                    ), start = Offset(0f, 0f), end = Offset(0f, 1000f)
-                                )
-                            )
-                    ) {
-                        Spacer(Modifier.height(18.dp))
-                        Text(
-                            "Sound Categories",
-                            fontSize = 24.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            modifier = Modifier.align(
-                                Alignment.CenterHorizontally
-                            ),
-                            color = Color.DarkGray
-                        )
-                        LazyColumnWithTwoItemsPerRow(items)
-                    }
-
+                Scaffold(modifier = Modifier.fillMaxSize(), bottomBar = {
+                    BottomNavigationItem(navController)
+                }) { paddingvalues ->
+                    Column(modifier = Modifier
+                        .fillMaxSize()
+                        .padding(paddingvalues)) { }
+                    DecisionScreen(navController)
                 }
+
+
             }
         }
     }
-}
-
-
-@Composable
-fun LazyColumnWithTwoItemsPerRow(sounditem: List<SoundItem>) {
-
-    LazyColumn {
-        items(sounditem.chunked(2)) { rowItems ->
-            Row(
-                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
-            ) {
-                rowItems.forEach { item ->
-                    Column(modifier = Modifier.padding(12.dp)) {
-                        Card(
-                            elevation = CardDefaults.cardElevation(16.dp),
-                            shape = CircleShape,
-                            modifier = Modifier.size(150.dp)
-                        ) {
-                            Box {
-                                Image(
-                                    painterResource(item.img),
-                                    contentDescription = "image",
-                                    modifier = Modifier
-                                        .clip(CircleShape)
-                                        .size(150.dp),
-                                    contentScale = ContentScale.Crop
-                                )
-
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .background(Color.Black.copy(0.5f))
-                                        .align(Alignment.BottomCenter)
-                                ){
-                                    Text(
-                                        text = item.title,
-                                        color = Color.LightGray,
-                                        fontWeight = FontWeight.Normal,
-                                        modifier = Modifier
-                                            .padding(8.dp, bottom = 12.dp)
-                                            .align(Alignment.Center)
-                                    )
-                                }
-
-                            }
-
-
-                        }
-
-
-                    }
-                    if (rowItems.size < 2) {
-                        Spacer(modifier = Modifier.width(150.dp))
-                    }
-
-
-                }
-            }
-
-
-        }
-    }
-
 }
